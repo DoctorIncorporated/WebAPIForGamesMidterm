@@ -10,7 +10,7 @@
     them their general weather information.
     
     You can use any of our in class files and the internet to complete the exam.
-    Don't forget to generate your pacjage.json file
+    Don't forget to generate your package.json file
 */
 
 /*
@@ -20,7 +20,7 @@
     -express
     -morgan
     -zippity-do-dah (converts zip codes to lat and lon coordinates)
-    -forcast.io (returns weather info using lat and lon coordinates)
+    -forecast.io (returns weather info using lat and lon coordinates)
 
 */
 var path = require("path");
@@ -37,7 +37,7 @@ var app = express();
     https://darksky.net/dev
 */
 var options = {
-    APIKey: "ENTER YOUR API KEY HERE",
+    APIKey: "dc10a3366b12ae0d4e7d497599721e49",
     timeout: 1000
   };//configures the options for forecast.io
 
@@ -48,30 +48,31 @@ var weather = new ForecastIo(options);//creates an instance of forecast.io
   Create a static route to the public folder.
   This will create a route to several essential JavaScript files and CSS files required for the app.
  */
-Your code here<----
+app.use(express.static(__dirname+'/public'));
 /*
   Step 4 
   Create a route to the views folder. 
   This folder has all the ejs files for the app.
 */
-Your code here<----
+app.use(express.static(__dirname+'/views'));
 /*
   Step 5 
   Set Morgan in dev mode so it logs all the requests to our server.
 */
-Your code here<----
+logger('dev');
 /*
   Step 6 
   Set your view engine to ejs.
 */
-Your code here<----
+app.set('view engine', 'ejs');
 
 /*
   Step 7 
   Use a get to render the index page
 */
-
-Your code here<----
+app.get('/', function(req, res){
+        res.render('index');
+});
 
 //===The get below takes the 5 digets from the zip code and converts it to latitude and longitude coordinates 
 //===It does this through an ajax request in a script in public/main.js
@@ -110,7 +111,10 @@ app.use(function(req, res) {
     Step 8
     Setup the app to listen on port 3000 
 */
-Your code here<----
+var port = 2222;
+app.listen(port, function(){
+    console.log('Server is running on Port: ' + port);
+});
 
 /*
     Step 9 
